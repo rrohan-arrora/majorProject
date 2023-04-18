@@ -2,6 +2,7 @@ import { ReturnBook } from "./ReturnBook";
 import { useEffect, useState } from "react";
 import BookModel from "../../../models/BookModel";
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
 function Carousal() {
     const [books, setBooks] = useState<BookModel[]>([]);
@@ -111,7 +112,7 @@ function Carousal() {
                     </div>
                 </div>
                 <div className='homepage-carousel-title mt-3'>
-                    <a className="btn btn-lg btn-outline-secondary" href="#">View More</a>
+                    <Link className="btn btn-lg btn-outline-secondary" to="/search">View More</Link>
                 </div>
             </div>
         </div>

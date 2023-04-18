@@ -1,3 +1,5 @@
+import { Link, NavLink } from "react-router-dom"
+
 export const ExploteTopBooks = () => {
     return(
         <div className="p-5 mb-4 bg-dark header">
@@ -6,9 +8,9 @@ export const ExploteTopBooks = () => {
                 <div>
                     <h1 className="display-5 fw-bold"> What next?</h1>
                     <p className="col-md-8 fs-4">Ok, find your next go to place to read!</p>
-                    <a type="button" className="btn main-color btn-lg text-white" href="#">
+                    <Link type="button" className="btn main-color btn-lg text-white" to="/search">
                         Explore top books
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
