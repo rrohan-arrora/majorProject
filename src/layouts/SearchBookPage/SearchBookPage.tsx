@@ -25,9 +25,10 @@ export const SearchBookPage = () => {
             if (searchUrl == '') {
                 url = `${baseUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
             } else {
-                url = baseUrl + searchUrl;
+                let searchWithPage = searchUrl.replace('<pageNumber>', `${currentPage-1}`);
+                url = baseUrl + searchWithPage;
             }
-
+            
             const response = await fetch(url);
 
             if (!response.ok) {
@@ -82,8 +83,9 @@ export const SearchBookPage = () => {
         if (search == "") {
             setSearchUrl("");
         } else {
-            setSearchUrl(`/search/findByTitleContaining?title=${search}&page=0&size=${booksPerPage}`)
+            setSearchUrl(`/search/findByTitleContaining?title=${search}&page=<pageNumber>&size=${booksPerPage}`)
         }
+        setCategory("Books Category");
     }
 
     const categoryField = (value: string) => {
@@ -94,7 +96,7 @@ export const SearchBookPage = () => {
             value.toLowerCase() === 'devops'
         ) {
             setCategory(value);
-            setSearchUrl(`/search/findByCategory?category=${value}&page=0&size=${booksPerPage}`)
+            setSearchUrl(`/search/findByCategory?category=${value}&page=<pageNumber>&size=${booksPerPage}`)
         } else {
             setCategory('All');
             setSearchUrl(`?page=0&size=${booksPerPage}`)
@@ -105,7 +107,8 @@ export const SearchBookPage = () => {
     const firstIndexOfBook: number = lastIndexofBookonCurrentPage - booksPerPage + 1;
     let numberOfBooksCurrentlyAvailable = lastIndexofBookonCurrentPage <= totalBooks ? lastIndexofBookonCurrentPage : totalBooks;
 
-    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber: number) => {
+        setCurrentPage(pageNumber)};
     return (
         <div>
             <div className="container">
