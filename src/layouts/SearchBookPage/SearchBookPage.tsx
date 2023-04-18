@@ -80,6 +80,12 @@ export const SearchBookPage = () => {
     }
 
     const searchHandleChange = () => {
+        setCurrentPage(1); // this is added so that if page number was already set to 2 
+                            // and some search occured where only single page is required, since pageNumber was set to 2
+                            // already, it will show no result. Therefore, we set the page 
+                            // to 1 default and if less records happen, it will show correctly;
+                            // demo: search java and go to 2nd page. Now search ra and see the result
+                            // before and after this line.
         if (search == "") {
             setSearchUrl("");
         } else {
@@ -89,6 +95,7 @@ export const SearchBookPage = () => {
     }
 
     const categoryField = (value: string) => {
+        setCurrentPage(1);
         if (
             value.toLowerCase() === 'fe' || 
             value.toLowerCase() === 'be' || 
