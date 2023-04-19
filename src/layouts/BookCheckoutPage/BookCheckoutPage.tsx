@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BookModel from "../../models/BookModel";
 import { StarReviews } from "../utils/StarReviews";
+import { CheckoutAndReviewBox } from "./CheckoutAndReviewBox";
 
 export const BookCheckoutPage = () => {
 
@@ -26,7 +27,7 @@ export const BookCheckoutPage = () => {
                 author: responseJson.author,
                 description: responseJson.description,
                 copies: responseJson.copies,
-                copies_available: responseJson.copies_available,
+                copies_available: responseJson.copiesAvailable,
                 category: responseJson.category,
                 img: responseJson.img,
             };
@@ -74,6 +75,7 @@ export const BookCheckoutPage = () => {
                             <StarReviews rating={0.5} size={32} />
                         </div>
                     </div>
+                    <CheckoutAndReviewBox book={book} mobile={false} />
                 </div>
                 <hr />
             </div>
@@ -93,6 +95,7 @@ export const BookCheckoutPage = () => {
                         <StarReviews rating={3.5} size={32} />
                     </div>
                 </div>
+                <CheckoutAndReviewBox book={book} mobile={true} />
                 <hr />
             </div>
         </div>
