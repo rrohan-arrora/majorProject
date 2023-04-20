@@ -5,13 +5,13 @@ export const StarReviews: React.FC<{ rating: number, size: number }> = (props) =
     let halfStar = 0;
     let emptyStar = 0;
 
-    if (rating != undefined && rating > 0 && rating <= 5) {
+    if (rating !== undefined && rating > 0 && rating <= 5) {
         for (let i = 0; i < 5; i++) {
             console.log(rating);
             if (rating >= 1) {
                 fullStar += 1;
                 rating  = rating-1;
-            } else if (rating == 0.5) {
+            } else if (rating === 0.5) {
                 halfStar += 1;
                 rating  = rating-1;
             } else {
