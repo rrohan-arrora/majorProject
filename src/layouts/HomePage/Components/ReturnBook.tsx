@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import BookModel from "../../../models/BookModel";
 
 export const ReturnBook: React.FC<{ booky: BookModel }> = (props) => {
@@ -17,7 +18,7 @@ export const ReturnBook: React.FC<{ booky: BookModel }> = (props) => {
                 }
                 <h6 className="mt-2">{props.booky.title}</h6>
                 <p>{props.booky.author}</p>
-                <a className="btn main-color text-white" href="#">Reserve</a>
+                <Link className="btn main-color text-white" to={`checkout/${props.booky.id}`}>Reserve</Link>
             </div>
         </div>
 
