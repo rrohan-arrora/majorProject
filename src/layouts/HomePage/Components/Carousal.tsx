@@ -25,7 +25,7 @@ function Carousal() {
             const loadedBooks: BookModel[] = [];
             for (const key in responseData) {
                 loadedBooks.push({
-                    id: parseInt(key),
+                    id: responseData[key].id,
                     title: responseData[key].title,
                     author: responseData[key].author,
                     description: responseData[key].description,

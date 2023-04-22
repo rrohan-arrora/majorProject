@@ -7,7 +7,7 @@ import { useOktaAuth } from "@okta/okta-react";
 export const BookCheckoutPage = () => {
 
     const { authState } = useOktaAuth();
-
+    console.log(authState)
     // Book state
     const [book, setBook] = useState<BookModel>();
     const [isLoading, setIsLoading] = useState(true);
@@ -51,7 +51,7 @@ export const BookCheckoutPage = () => {
             setIsLoading(false);
             setHttpError(error.message);
         })
-    }, []);
+    }, [IsCheckedOut]);
 
     useEffect(() => {
         const fetchUserCurrentLoansCount = async () => {
@@ -68,7 +68,7 @@ export const BookCheckoutPage = () => {
                 if(!currentLoansCountResponse.ok){
                     throw new Error("Something went wrong");
                 }
-                
+
                 const currentLoansCountResponseJson = await currentLoansCountResponse.json();
                 setCurrentLoansCount(currentLoansCountResponseJson);
             }
@@ -80,7 +80,7 @@ export const BookCheckoutPage = () => {
             setIsLoadingcurrentLoansCount(false);
             setHttpError(error.message);
         })
-    }, [authState]);
+    }, [authState, IsCheckedOut]);
 
     useEffect(() => {
         const fetchUserCheckedOutBook = async () =>{
@@ -91,7 +91,7 @@ export const BookCheckoutPage = () => {
             setisLoadingBookCheckedOut(false);
             setHttpError(error.message);
         })
-    }, [authState]);
+    }, [authState, IsCheckedOut]);
 
     if (isLoading ) {
         return (
@@ -106,6 +106,22 @@ export const BookCheckoutPage = () => {
                 <p>{httpError}</p>
             </div>
         )
+    }
+
+    async function checkoutBook() {
+        const url = `http://localhost:1111/api/books/secure/checkout/?bookId=${bookId}`;
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        };
+        const checkoutResponse = await fetch(url, requestOptions);
+        if (!checkoutResponse.ok) {
+            throw new Error('Something went wrong!');
+        }
+        setIsCheckedout(true);
     }
 
     return (
@@ -130,7 +146,8 @@ export const BookCheckoutPage = () => {
                     <CheckoutAndReviewBox book={book} mobile={false} 
                                           currentLoansCount={currentLoansCount}
                                           isAuthenticated={authState?.isAuthenticated}
-                                          isCheckedOut={IsCheckedOut}/>
+                                          isCheckedOut={IsCheckedOut}
+                                          checkoutBook={checkoutBook}/>
                 </div>
                 <hr />
             </div>
@@ -153,7 +170,8 @@ export const BookCheckoutPage = () => {
                 <CheckoutAndReviewBox book={book} mobile={false} 
                                           currentLoansCount={currentLoansCount}
                                           isAuthenticated={authState?.isAuthenticated}
-                                          isCheckedOut={IsCheckedOut}/>
+                                          isCheckedOut={IsCheckedOut}
+                                          checkoutBook={checkoutBook}/>
                 <hr />
             </div>
         </div>
