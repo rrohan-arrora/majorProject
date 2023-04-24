@@ -2,6 +2,7 @@ import { useOktaAuth } from "@okta/okta-react"
 import { useEffect, useState } from "react";
 import { ShelfCurrentLoans } from "../../../models/ShelfCurrentLoans";
 import { Link } from "react-router-dom";
+import { LoansModal } from "./LoansModal";
 
 export const Loans = () => {
     const { authState } = useOktaAuth();
@@ -95,7 +96,7 @@ export const Loans = () => {
                                                     <button className='list-group-item list-group-item-action'
                                                         aria-current='true' data-bs-toggle='modal'
                                                         data-bs-target={`#modal${shelfCurrentLoan.book.id}`}>
-                                                        Manage Loan
+                                                        Manage Loans
                                                     </button>
                                                     <Link to="/search" className='list-group-item list-group-item-action'>
                                                         Search more books?
@@ -113,6 +114,7 @@ export const Loans = () => {
                                     </div>
                                 </div>
                                 <hr />
+                                <LoansModal  shelfCurrentLoan={shelfCurrentLoan}  mobile={false}/>
                             </div>
                         ))}
                     </> :
@@ -166,7 +168,7 @@ export const Loans = () => {
                                                 <button className='list-group-item list-group-item-action' 
                                                     aria-current='true' data-bs-toggle='modal' 
                                                     data-bs-target={`#mobilemodal${shelfCurrentLoan.book.id}`}>
-                                                        Manage Loan
+                                                        Manage Loans
                                                 </button>
                                                 <Link to={'search'} className='list-group-item list-group-item-action'>
                                                     Search more books?
@@ -174,6 +176,7 @@ export const Loans = () => {
                                             </div>
                                         </div>
                                         <hr/>
+                                        <LoansModal  shelfCurrentLoan={shelfCurrentLoan}  mobile={true}/>
                                         <p className='mt-3'>
                                             Help other find their adventure by reviewing your loan.
                                         </p>
