@@ -84,7 +84,25 @@ export const BookCheckoutPage = () => {
 
     useEffect(() => {
         const fetchUserCheckedOutBook = async () => {
+            if (authState && authState.isAuthenticated) {
+                const url = `http://localhost:1111/api/books/secure/ischeckedout/byuser/?bookId=${bookId}`;
+                const requestOptions = {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                };
+                const bookCheckedOut = await fetch(url, requestOptions);
 
+                if (!bookCheckedOut.ok) {
+                    throw new Error('Something went wrong!');
+                }
+
+                const bookCheckedOutResponseJson = await bookCheckedOut.json();
+                setIsCheckedout(bookCheckedOutResponseJson);
+            }
+            setisLoadingBookCheckedOut(false);
         }
 
         fetchUserCheckedOutBook().catch((error: any) => {
