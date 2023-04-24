@@ -55,7 +55,6 @@ export const Loans = () => {
     }
 
     async function returnBook(bookId: number) {
-        debugger
         const url = `http://localhost:1111/api/books/secure/return/?bookId=${bookId}`;
         const requestOptions = {
             method: 'PUT',
@@ -64,6 +63,23 @@ export const Loans = () => {
                 'Content-Type': 'application/json'
             }
         };
+        const returnResponse = await fetch(url, requestOptions);
+        if (!returnResponse.ok) {
+            throw new Error('Something went wrong!');
+        }
+        setCheckout(!checkout);
+    }
+
+    async function renewBook(bookId: number) {
+        const url = `http://localhost:1111/api/books/secure/renew/return/?bookId=${bookId}`;
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        };
+
         const returnResponse = await fetch(url, requestOptions);
         if (!returnResponse.ok) {
             throw new Error('Something went wrong!');
@@ -113,7 +129,7 @@ export const Loans = () => {
                                                     <button className='list-group-item list-group-item-action'
                                                         aria-current='true' data-bs-toggle='modal'
                                                         data-bs-target={`#modal${shelfCurrentLoan.book.id}`}>
-                                                        Manage Loans
+                                                        Manage Book
                                                     </button>
                                                     <Link to="/search" className='list-group-item list-group-item-action'>
                                                         Search more books?
@@ -131,13 +147,13 @@ export const Loans = () => {
                                     </div>
                                 </div>
                                 <hr />
-                                <LoansModal  shelfCurrentLoan={shelfCurrentLoan}  mobile={false} returnBook={returnBook}/>
+                                <LoansModal  shelfCurrentLoan={shelfCurrentLoan}  mobile={false} returnBook={returnBook} renewBook={renewBook}/>
                             </div>
                         ))}
                     </> :
                     <>
                         <h3 className='mt-3'>
-                            Currently no loans
+                            Currently no book issued
                         </h3>
                         <Link className='btn btn-primary' to="/search">
                             Search for a new book
@@ -193,7 +209,7 @@ export const Loans = () => {
                                             </div>
                                         </div>
                                         <hr/>
-                                        <LoansModal  shelfCurrentLoan={shelfCurrentLoan}  mobile={true} returnBook={returnBook}/>
+                                        <LoansModal  shelfCurrentLoan={shelfCurrentLoan}  mobile={true} returnBook={returnBook} renewBook={renewBook}/>
                                         <p className='mt-3'>
                                             Help other find their adventure by reviewing your loan.
                                         </p>

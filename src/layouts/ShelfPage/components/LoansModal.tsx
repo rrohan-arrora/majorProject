@@ -1,7 +1,8 @@
 import { ShelfCurrentLoans } from "../../../models/ShelfCurrentLoans";
 
 export const LoansModal: React.FC<{
-    shelfCurrentLoan: ShelfCurrentLoans, mobile: boolean, returnBook: any}> = (props) => {
+    shelfCurrentLoan: ShelfCurrentLoans, mobile: boolean, returnBook: any, renewBook: any
+}> = (props) => {
     return (
         <div className='modal fade' id={props.mobile ? `mobilemodal${props.shelfCurrentLoan.book.id}` :
             `modal${props.shelfCurrentLoan.book.id}`} data-bs-backdrop='static' data-bs-keyboard='false'
@@ -55,14 +56,20 @@ export const LoansModal: React.FC<{
                                         aria-current='true'>
                                         Return Book
                                     </button>
-                                    <button data-bs-dismiss='modal'
+                                    <button onClick={
+                                        props.shelfCurrentLoan.daysLeft < 0 ?
+                                            (event) => event.preventDefault()
+                                            :
+                                            () => props.renewBook(props.shelfCurrentLoan.book.id)
+                                    }
+                                        data-bs-dismiss='modal'
                                         className={
                                             props.shelfCurrentLoan.daysLeft < 0 ?
                                                 'list-group-item list-group-item-action inactiveLink' :
                                                 'list-group-item list-group-item-action'
                                         }>
                                         {props.shelfCurrentLoan.daysLeft < 0 ?
-                                            'Late dues cannot be renewed' : 'Renew loan for 7 days'
+                                            'Late dues cannot be renewed' : 'Renew Book for 14 days'
                                         }
                                     </button>
                                 </div>
