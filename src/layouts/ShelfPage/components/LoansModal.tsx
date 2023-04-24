@@ -1,7 +1,7 @@
 import { ShelfCurrentLoans } from "../../../models/ShelfCurrentLoans";
 
 export const LoansModal: React.FC<{
-    shelfCurrentLoan: ShelfCurrentLoans, mobile: boolean}> = (props) => {
+    shelfCurrentLoan: ShelfCurrentLoans, mobile: boolean, returnBook: any}> = (props) => {
     return (
         <div className='modal fade' id={props.mobile ? `mobilemodal${props.shelfCurrentLoan.book.id}` :
             `modal${props.shelfCurrentLoan.book.id}`} data-bs-backdrop='static' data-bs-keyboard='false'
@@ -50,7 +50,7 @@ export const LoansModal: React.FC<{
                                     </p>
                                 }
                                 <div className='list-group mt-3'>
-                                    <button
+                                    <button onClick={() => props.returnBook(props.shelfCurrentLoan.book.id)}
                                         data-bs-dismiss='modal' className='list-group-item list-group-item-action'
                                         aria-current='true'>
                                         Return Book
