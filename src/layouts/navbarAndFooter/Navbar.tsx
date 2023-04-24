@@ -9,7 +9,9 @@ export const Navbar = () => {
             <div>Loading.....</div>
         )
     }
-    const handleLogout = async () => oktaAuth.signOut();
+    const handleLogout = async () => {
+        debugger;
+        oktaAuth.signOut()};
     // console.log(authState);
     return (
         <nav className='navbar navbar-expand-lg navbar-dark main-color py-3'>
@@ -30,7 +32,7 @@ export const Navbar = () => {
                         <li className='nav-item'>
                             <NavLink className="nav-link" to="/search">Search Books</NavLink>
                         </li>
-                        {authState?.isAuthenticated &&
+                        {authState.isAuthenticated && 
                             <li className='nav-item'>
                                 <NavLink className="nav-link" to="/shelf">Shelf</NavLink>
                             </li>

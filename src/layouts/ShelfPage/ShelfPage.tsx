@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Loans } from "./components/Loans";
 export const ShelfPage = () => {
     return (
         <div className='container'>
@@ -20,7 +21,7 @@ export const ShelfPage = () => {
                 <div className='tab-content' id='nav-tabContent'>
                     <div className='tab-pane fade show active' id='nav-loans' role='tabpanel'
                         aria-labelledby='nav-loans-tab'>
-                            LOANS
+                            <Loans/>
                     </div>
                     <div className='tab-pane fade' id='nav-history' role='tabpanel'
                         aria-labelledby='nav-history-tab'>
