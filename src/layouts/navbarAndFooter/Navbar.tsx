@@ -10,7 +10,6 @@ export const Navbar = () => {
         )
     }
     const handleLogout = async () => {
-        debugger;
         oktaAuth.signOut()};
     // console.log(authState);
     return (
