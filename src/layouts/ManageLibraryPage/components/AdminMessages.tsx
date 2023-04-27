@@ -16,7 +16,7 @@ export const AdminMessages = () => {
     const [messages, setMessages] = useState<MessageModel[]>([]);
     const [messagesPerPage] = useState(10);
 
-    // Pagination
+    // Pagination for the page
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
