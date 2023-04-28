@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BookModel from "../../models/BookModel";
 import { Pagination } from "../utils/Pagination";
+import { ChangeQuantityOfBook } from "./components/ChangeQuantityOfBooks";
 
 export const ChangeQuantityofBooks = () => {
 
@@ -77,7 +78,7 @@ export const ChangeQuantityofBooks = () => {
                 <>
                     <h3>Number of results: ({totalBooks})</h3>
                     {books.map(book => (
-                        <p>Display different quantity of books</p>
+                        <ChangeQuantityOfBook book={book}/>
                     ))}
                 </>
 
