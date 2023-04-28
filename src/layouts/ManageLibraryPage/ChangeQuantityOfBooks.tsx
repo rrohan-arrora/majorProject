@@ -13,6 +13,8 @@ export const ChangeQuantityofBooks = () => {
     const [totalBooks, setTotalBooks] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
+    const [bookDelete, setBookDelete] = useState(false);
+
     useEffect(() => {
 
         const fetchBooks = async () => {
@@ -50,8 +52,7 @@ export const ChangeQuantityofBooks = () => {
             setIsLoading(false);
             setHttpError(error.message);
         })
-        window.scrollTo(0, 0);
-    }, [currentPage]);
+    }, [currentPage, bookDelete]);
 
     if (isLoading) {
         return (
@@ -72,13 +73,17 @@ export const ChangeQuantityofBooks = () => {
         setCurrentPage(pageNumber)
     };
 
+    const deleteBookOrNot = () => {
+        setBookDelete(!bookDelete);
+    }
+
     return (
         <div className="mt-3">
             {totalBooks > 0 ?
                 <>
                     <h3>Number of results: ({totalBooks})</h3>
                     {books.map(book => (
-                        <ChangeQuantityOfBook book={book}/>
+                        <ChangeQuantityOfBook book={book} deleteBookOrNot={deleteBookOrNot}/>
                     ))}
                 </>
 
