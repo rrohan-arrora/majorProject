@@ -11,48 +11,52 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel }> = (props, key) 
     // using use effect to call the function itself as we are 
     // initializing the quantity and remaining state variables
     useEffect(() => {
+        debugger
         const fetchBookInState = () => {
             props.book.copies ? setQuantity(props.book.copies) : setQuantity(0);
             props.book.copies_available ? setRemaining(props.book.copies_available) : setRemaining(0);
         };
         fetchBookInState();
-    }, []);
+    }, [ ]); // no need to add quantity and remaining to use effect as we are not fetching the books again.
+    // therefore, even if, quantity and setremaining are updated, still book props will not be updated
+    // and we are again setting up the quantity and remaining to default value as we have not fetched
+    // the updated book.
 
-    // async function increaseQuantity() {
-    //     const url = `http://localhost:1111/api/admin/secure/increase/book/quantity/?bookId=${props.book?.id}`;
-    //     const requestOptions = {
-    //         method: 'PUT',
-    //         headers: {
-    //             Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
-    //             'Content-Type': 'application/json'
-    //         }
-    //     };
+    async function increaseQuantity() {
+        const url = `http://localhost:1111/api/admin/secure/increase/book/quantity/?bookId=${props.book?.id}`;
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        };
 
-    //     const quantityUpdateResponse = await fetch(url, requestOptions);
-    //     if (!quantityUpdateResponse.ok) {
-    //         throw new Error('Something went wrong!');
-    //     }
-    //     setQuantity(quantity + 1);
-    //     setRemaining(remaining + 1);
-    // }
+        const quantityUpdateResponse = await fetch(url, requestOptions);
+        if (!quantityUpdateResponse.ok) {
+            throw new Error('Something went wrong!');
+        }
+        setQuantity(quantity + 1);
+        setRemaining(remaining + 1);
+    }
 
-    // async function decreaseQuantity() {
-    //     const url = `http://localhost:1111/api/admin/secure/decrease/book/quantity/?bookId=${props.book?.id}`;
-    //     const requestOptions = {
-    //         method: 'PUT',
-    //         headers: {
-    //             Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
-    //             'Content-Type': 'application/json'
-    //         }
-    //     };
+    async function decreaseQuantity() {
+        const url = `http://localhost:1111/api/admin/secure/decrease/book/quantity/?bookId=${props.book?.id}`;
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        };
 
-    //     const quantityUpdateResponse = await fetch(url, requestOptions);
-    //     if (!quantityUpdateResponse.ok) {
-    //         throw new Error('Something went wrong!');
-    //     }
-    //     setQuantity(quantity - 1);
-    //     setRemaining(remaining - 1);
-    // }
+        const quantityUpdateResponse = await fetch(url, requestOptions);
+        if (!quantityUpdateResponse.ok) {
+            throw new Error('Something went wrong!');
+        }
+        setQuantity(quantity - 1);
+        setRemaining(remaining - 1);
+    }
 
     // async function deleteBook() {
     //     const url = `http://localhost:1111/api/admin/secure/delete/book/?bookId=${props.book?.id}`;
@@ -114,13 +118,13 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel }> = (props, key) 
                 </div>
                 <div className='mt-3 col-md-3'>
                     <div className='d-flex justify-content-center'>
-                        <button className='m-1 btn btn-md main-color text-white'>Add Quantity</button>
+                        <button className='m-1 btn btn-md main-color text-white' onClick={increaseQuantity}>Add Quantity</button>
                     </div>
                 </div>
 
                 <div className='mt-3 col-md-5'>
                     <div className='d-flex justify-content-end'>
-                        <button className='m1 btn btn-md btn-warning'>Decrease Quantity</button>
+                        <button className='m1 btn btn-md btn-warning' onClick={decreaseQuantity}>Decrease Quantity</button>
                     </div>
                 </div>
             </div>

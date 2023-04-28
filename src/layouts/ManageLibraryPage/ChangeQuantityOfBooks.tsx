@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BookModel from "../../models/BookModel";
 import { Pagination } from "../utils/Pagination";
-import { ChangeQuantityOfBook } from "./components/ChangeQuantityOfBooks";
+import { ChangeQuantityOfBook } from "./components/ChangeQuantityOfBook";
 
 export const ChangeQuantityofBooks = () => {
 
