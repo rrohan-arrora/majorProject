@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import BookModel from "../../../models/BookModel";
 import { useOktaAuth } from '@okta/okta-react';
 
-export const ChangeQuantityOfBook: React.FC<{ book: BookModel}> = (props, key) => {
-    
+export const ChangeQuantityOfBook: React.FC<{ book: BookModel }> = (props, key) => {
+
     const { authState } = useOktaAuth();
     const [quantity, setQuantity] = useState<number>(0);
     const [remaining, setRemaining] = useState<number>(0);
@@ -70,7 +70,7 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel}> = (props, key) =
     //     }
     //     props.deleteBook();
     // }
-    
+
     return (
         <div className='card mt-3 shadow p-3 mb-3 bg-body rounded'>
             <div className='row g-0'>
@@ -79,7 +79,7 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel}> = (props, key) =
                         {props.book.img ?
                             <img src={props.book?.img} width='123' height='196' alt='Book' />
                             :
-                            <img src={require('./../../../Images/BooksImages/book-1000.png')} 
+                            <img src={require('./../../../Images/BooksImages/book-1000.png')}
                                 width='123' height='196' alt='Book' />
                         }
                     </div>
@@ -87,7 +87,7 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel}> = (props, key) =
                         {props.book.img ?
                             <img src={props.book.img} width='123' height='196' alt='Book' />
                             :
-                            <img src={require('./../../../Images/BooksImages/book-1000.png')} 
+                            <img src={require('./../../../Images/BooksImages/book-1000.png')}
                                 width='123' height='196' alt='Book' />
                         }
                     </div>
@@ -107,13 +107,22 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel}> = (props, key) =
                         <p>Books Remaining: <b>{remaining}</b></p>
                     </div>
                 </div>
-                {/* <div className='mt-3 col-md-1'>
+                <div className='mt-3 col-md-4'>
                     <div className='d-flex justify-content-start'>
-                        <button className='m-1 btn btn-md btn-danger' onClick={deleteBook}>Delete</button>
+                        <button className='m-1 btn btn-md btn-danger'>Delete</button>
                     </div>
                 </div>
-                <button className='m1 btn btn-md main-color text-white' onClick={increaseQuantity}>Add Quantity</button>
-                <button className='m1 btn btn-md btn-warning' onClick={decreaseQuantity}>Decrease Quantity</button> */}
+                <div className='mt-3 col-md-3'>
+                    <div className='d-flex justify-content-center'>
+                        <button className='m-1 btn btn-md main-color text-white'>Add Quantity</button>
+                    </div>
+                </div>
+
+                <div className='mt-3 col-md-5'>
+                    <div className='d-flex justify-content-end'>
+                        <button className='m1 btn btn-md btn-warning'>Decrease Quantity</button>
+                    </div>
+                </div>
             </div>
         </div>
     );
