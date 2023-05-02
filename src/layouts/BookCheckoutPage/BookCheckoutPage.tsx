@@ -25,7 +25,7 @@ export const BookCheckoutPage = () => {
 
     useEffect(() => {
         const fetchBook = async () => {
-            const baseUrl: string = `${process.env.REACT_APP_API}/books/${bookId}`;
+            const baseUrl: string = `http://localhost:1111/api/books/${bookId}`;
             const response = await fetch(baseUrl);
             if (!response.ok) {
                 throw new Error('Something went wrong!');
@@ -56,7 +56,7 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchUserCurrentLoansCount = async () => {
             if (authState?.isAuthenticated) {
-                const url = `${process.env.REACT_APP_API}/books/secure/currentLoans/count`;
+                const url = `http://localhost:1111/api/books/secure/currentLoans/count`;
                 const requrstOptions = {
                     method: 'GET',
                     headers: {
@@ -85,7 +85,7 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchUserCheckedOutBook = async () => {
             if (authState && authState.isAuthenticated) {
-                const url = `${process.env.REACT_APP_API}/books/secure/ischeckedout/byuser/?bookId=${bookId}`;
+                const url = `http://localhost:1111/api/books/secure/ischeckedout/byuser/?bookId=${bookId}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
@@ -127,7 +127,7 @@ export const BookCheckoutPage = () => {
     }
 
     async function checkoutBook() {
-        const url = `${process.env.REACT_APP_API}/books/secure/checkout/?bookId=${bookId}`;
+        const url = `http://localhost:1111/api/books/secure/checkout/?bookId=${bookId}`;
         const requestOptions = {
             method: 'PUT',
             headers: {
