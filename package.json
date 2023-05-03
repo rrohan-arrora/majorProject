@@ -1,7 +1,7 @@
 {
   "name": "major-project",
   "version": "0.1.0",
-  "proxy": "http://localhost:1111",
+  "proxy": "http://backend-app:1111",
   "private": true,
   "dependencies": {
     "@okta/okta-react": "^6.4.3",
